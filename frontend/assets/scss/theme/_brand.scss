@@ -1,4 +1,10 @@
-// Replace these two values with the final Oneteam brand colors.
+// Replace these two values with the final jonova brand colors.
 // Keeping them in one file makes upstream FileGator updates easier to merge.
-$brand-primary: #34b891;
-$brand-primary-light: #6ec8a8;
+$brand-primary: #196d8d;
+$brand-primary-light: #c7d300;
+
+/* Logo */
+.navbar-item.logo img {
+    max-width: 100%;
+    height: 100%;
+}

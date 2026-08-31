@@ -1,10 +1,10 @@
-# Oneteam News FileGator
+# Jonova News FileGator
 
 Schlanker, kundenspezifischer FileGator-Fork für
-`https://oneteam-news.de/`, basierend auf FileGator 7.15.1.
+`https://shopdaten.jonova.de/`, basierend auf FileGator 7.15.1.
 
 Angemeldete Benutzer pflegen die Dateien im Portal. Bilder und PDFs werden
-unter `https://oneteam-news.de/files/...` von Nginx öffentlich und
+unter `https://shopdaten.jonova.de/files/...` von Nginx öffentlich und
 schreibgeschützt ausgeliefert. Im Datei-Dropdown erzeugt
 **„Öffentlichen Link kopieren“** genau diese URL.
 
@@ -37,7 +37,7 @@ npm run build
 scripts/build-release.sh
 ```
 
-Das Ergebnis liegt unter `build/oneteam-news-filegator.tar.gz`. Es enthält
+Das Ergebnis liegt unter `build/shopdaten.jonova-filegator.tar.gz`. Es enthält
 keine Benutzer, Sessions, hochgeladenen Dateien oder Secrets.
 
 ## Deployment
@@ -49,17 +49,17 @@ diese Repository-Secrets:
 - `SSH_PORT`
 - `SSH_PRIVATE_KEY`
 - `SSH_USER_PRODUCTION`
-- `WORK_DIR_PRODUCTION` (normalerweise `/var/www/oneteam-news.de`)
+- `WORK_DIR_PRODUCTION` (normalerweise `/var/www/shopdaten.jonova.de`)
 
 Optional kann die Repository-Variable `HEALTHCHECK_URL` gesetzt werden. Ohne
-Angabe wird `https://oneteam-news.de/index.php?r=/getconfig` verwendet.
+Angabe wird `https://shopdaten.jonova.de/index.php?r=/getconfig` verwendet.
 `PHP_FPM_SERVICE` ist ebenfalls optional und verwendet standardmäßig
 `php8.4-fpm`.
 
 Das Deployment legt Releases unter `releases/<release-id>` ab, verknüpft die
 persistenten Daten, übernimmt die mitgelieferte `configuration_sample.php` als
 Release-Konfiguration und schaltet anschließend
-`/var/www/oneteam-news.de/live` atomar auf das neue Release. Bei einem
+`/var/www/shopdaten.jonova.de/live` atomar auf das neue Release. Bei einem
 fehlgeschlagenen Healthcheck wird der vorherige Stand wieder aktiviert. Nach
 Aktivierung und Rollback startet das Skript den projektspezifisch per sudoers
 freigegebenen PHP-FPM-Dienst neu.
@@ -69,10 +69,10 @@ freigegebenen PHP-FPM-Dienst neu.
 Diese Pfade werden von Ansible angelegt und niemals aus Git überschrieben:
 
 ```text
-/var/www/oneteam-news.de/shared/private/
-/var/www/oneteam-news.de/shared/private/csrf.key
-/var/www/oneteam-news.de/shared/private/users.json
-/var/www/oneteam-news.de/shared/repository/
+/var/www/shopdaten.jonova.de/shared/private/
+/var/www/shopdaten.jonova.de/shared/private/csrf.key
+/var/www/shopdaten.jonova.de/shared/private/users.json
+/var/www/shopdaten.jonova.de/shared/repository/
 ```
 
 Ansible erzeugt `csrf.key` beim ersten Lauf automatisch und behält denselben
@@ -85,24 +85,24 @@ persistenten Bereich übernommen. Ihr Inhalt bleibt dabei unverändert:
 
 ```bash
 cp /pfad/zum/bisherigen/private/users.json \
-  /var/www/oneteam-news.de/shared/private/users.json
+  /var/www/shopdaten.jonova.de/shared/private/users.json
 chown stl-php:<deployment-gruppe> \
-  /var/www/oneteam-news.de/shared/private/users.json
-chmod 0640 /var/www/oneteam-news.de/shared/private/users.json
+  /var/www/shopdaten.jonova.de/shared/private/users.json
+chmod 0640 /var/www/shopdaten.jonova.de/shared/private/users.json
 ```
 
 `shared/private/logs`, `shared/private/sessions` und `shared/private/tmp`
 müssen für den PHP-Runtime-User `stl-php` beschreibbar sein. Der Nginx-
-Document-Root zeigt auf `/var/www/oneteam-news.de/live/dist`; `/files/` wird
+Document-Root zeigt auf `/var/www/shopdaten.jonova.de/live/dist`; `/files/` wird
 direkt aus `shared/repository` ausgeliefert.
 
 Der öffentliche Basispfad steht in der Anwendung fest auf `/files`. Beim
 Kopieren ergänzt das Frontend automatisch die aktuelle Domain und erzeugt
-beispielsweise `https://oneteam-news.de/files/bild.jpg`.
+beispielsweise `https://shopdaten.jonova.de/files/bild.jpg`.
 
 Der sichtbare App-Name wird vom Nginx-Vhost aus dem Ansible-Projektnamen
-übergeben. Bei `name: oneteam-news.de` zeigt FileGator daher automatisch
-`oneteam-news.de` an; eine zusätzliche App-Name-Variable ist nicht nötig.
+übergeben. Bei `name: shopdaten.jonova.de` zeigt FileGator daher automatisch
+`shopdaten.jonova.de` an; eine zusätzliche App-Name-Variable ist nicht nötig.
 
 ## Lizenz
 

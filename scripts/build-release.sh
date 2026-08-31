@@ -2,7 +2,7 @@
 set -Eeuo pipefail
 
 project_root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
-output_path=${1:-"$project_root/build/oneteam-news-filegator.tar.gz"}
+output_path=${1:-"$project_root/build/shopdaten.jonova-filegator.tar.gz"}
 staging_root=$(mktemp -d)
 package_root="$staging_root/filegator"
 

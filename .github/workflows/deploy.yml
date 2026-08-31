@@ -7,7 +7,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: oneteam-news-production
+  group: shopdaten.jonova-production
   cancel-in-progress: false
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
       SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
       SSH_USER_PRODUCTION: ${{ secrets.SSH_USER_PRODUCTION }}
       WORK_DIR_PRODUCTION: ${{ secrets.WORK_DIR_PRODUCTION }}
-      HEALTHCHECK_URL: ${{ vars.HEALTHCHECK_URL || 'https://oneteam-news.de/index.php?r=/getconfig' }}
+      HEALTHCHECK_URL: ${{ vars.HEALTHCHECK_URL || 'https://shopdaten.jonova.de/index.php?r=/getconfig' }}
       PHP_FPM_SERVICE: ${{ vars.PHP_FPM_SERVICE || 'php8.4-fpm' }}
 
     steps:
@@ -84,7 +84,7 @@ jobs:
             -o BatchMode=yes \
             -o IdentitiesOnly=yes \
             -o StrictHostKeyChecking=accept-new \
-            build/oneteam-news-filegator.tar.gz \
+            build/shopdaten.jonova-filegator.tar.gz \
             "$SSH_USER_PRODUCTION@$SSH_HOST:$WORK_DIR_PRODUCTION/incoming/$RELEASE_ID.tar.gz"
 
       - name: Activate release

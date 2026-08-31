@@ -2,8 +2,8 @@
 set -Eeuo pipefail
 
 release_id=${1:?Usage: deploy.sh RELEASE_ID [BASE_DIR] [HEALTHCHECK_URL] [PHP_FPM_SERVICE]}
-base_dir=${2:-/var/www/oneteam-news.de}
-healthcheck_url=${3:-https://oneteam-news.de/index.php?r=/getconfig}
+base_dir=${2:-/var/www/shopdaten.jonova.de}
+healthcheck_url=${3:-https://shopdaten.jonova.de/index.php?r=/getconfig}
 php_fpm_service=${4:-php8.4-fpm}
 
 if [[ ! "$release_id" =~ ^[a-zA-Z0-9._-]+$ ]]; then
