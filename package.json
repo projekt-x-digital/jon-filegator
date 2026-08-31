@@ -1,0 +1,30 @@
+{
+  "name": "filegator",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "vue-cli-service build --no-clean && sh scripts/copy-branding.sh"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "js-base64": "^2.5.2",
+    "moment": "2.30.1",
+    "vue-lazyload": "^1.3.3"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@vue/cli-plugin-babel": "^4.3.1",
+    "@vue/cli-service": "^4.3.1",
+    "axios": "^0.21.1",
+    "babel-core": "7.0.0-bridge.0",
+    "buefy": "^0.7.10",
+    "sass": "^1.82.0",
+    "resumablejs": "^1.1.0",
+    "sass-loader": "^7.3.1",
+    "vue": "^2.6.11",
+    "vue-clipboard2": "^0.3.1",
+    "vue-router": "^3.1.6",
+    "vue-template-compiler": "^2.6.11",
+    "vuex": "^3.4.0"
+  }
+}
